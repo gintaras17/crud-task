@@ -27,7 +27,7 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                 $title = $row["title"];
                 $description = $row["description"];
             } else{
-                // URL doesn't contain valid id parameter. Redirect to error page
+                // if title and description doesn't contain valid values. Redirect to error page
                 header("location: ./error.php");
                 exit();
             }
@@ -43,7 +43,7 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
     // Close connection
     mysqli_close($link);
 } else{
-    // URL doesn't contain id parameter. Redirect to error page
+    // if values doesn't contain parameters. Redirect to error page
     header("location: ./error.php");
     exit();
 }

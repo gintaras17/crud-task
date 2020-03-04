@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Gintaras's tenders</title>
@@ -40,16 +40,13 @@
 
                     $record_per_page = 500;
                     $page = '';
-                    if(isset($_GET["page"]))
-                    {
-                    $page = $_GET["page"];
-                    }
-                    else
-                    {
+                    if(isset($_GET["page"])) {
+                        $page = $_GET["page"];
+                    } else {
                     $page = 1;
                     }
 
-                    $start_from = ($page-1)*$record_per_page;
+                    $start_from = ($page-1) * $record_per_page;
 
                     $query = "SELECT * FROM tenders ORDER BY id ASC LIMIT $start_from, $record_per_page";
                     $result = mysqli_query($link, $query);

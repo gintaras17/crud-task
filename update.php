@@ -11,7 +11,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     // Get hidden input value
     $id = $_POST["id"];
     
-    // Validate name
+    // Validate title
     $input_title = trim($_POST["title"]);
     if(empty($input_title)){
         $title_error = "Please enter a title.";
@@ -19,7 +19,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         $title = $input_title;
     }
     
-    // Validate address
+    // Validate description
     $input_description = trim($_POST["description"]);
     if(empty($input_description)){
         $description_error = "Please enter the description.";     

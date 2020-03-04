@@ -8,16 +8,18 @@ $title_error = $description_error = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    // Validate name
-    $input_title = trim($_POST["title"]);
+    // Validate title
+    $input_title = mysqli_real_escape_string($link, $_POST["title"]);
     if(empty($input_title)){
         $title_error = "Please enter a title.";
+    } elseif(!filter_var($input_title, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/[a-zA-Z_]\w*/")))){
+        $title_error = "Please enter a valid name, firs letters, then numbers.";
     } else{
         $title = $input_title;
     }
     
-    // Validate address
-    $input_description = trim($_POST["description"]);
+    // Validate description
+    $input_description = mysqli_real_escape_string($link, $_POST["description"]);
     if(empty($input_description)){
         $description_error = "Please enter a description.";     
     } else{
@@ -39,7 +41,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
-                // Records created successfully. Redirect to landing page
+                // Records created successfully. Redirect to index page
                 header("location: ./index.php");
                 exit();
             } else{
@@ -78,7 +80,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         <h2>Create Record</h2>
                     </div>
                     <p>Please fill this form and submit to add tender record to the database.</p>
-                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                         <div class="form-group <?php echo (!empty($title_error)) ? 'has-error' : ''; ?>">
                             <label>Title</label>
                             <input type="text" name="title" class="form-control" value="<?php echo $title; ?>">
